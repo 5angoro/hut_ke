@@ -1,0 +1,100 @@
+@import helper._
+@import play.mvc.Http.Request
+@()(implicit request: Request)
+@main("Welcome to Play") {
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="logo">
+        <span class="hut">hut</span><span class="ke">.ke</span>
+      </div>
+      <h2>Manager Portal</h2>
+      <p>Access your property management dashboard</p>
+    </div>
+    <form method="post" action="@routes.HomeController.managerLogin()" class="auth-form" id="managerLoginForm">
+      @CSRF.formField
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-input">
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <button type="button" class="toggle-password">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" name="remember"> Remember me
+        </label>
+        <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="manager_sp">Sign up</a></p>
+        <p>Are you a tenant? <a href="tenant_ln">Tenant login</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/manager.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('managerLoginForm');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+                try {
+        // Simulate API call (replace with actual fetch/axios)
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+        });
+
+        if (!response.ok) throw new Error('Login failed');
+
+        // Success: Redirect or show success message
+        window.location.href = 'manager_dash'; // Example redirect
+
+    } catch (error) {
+        // Error: Re-enable button and show error
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+        alert('Login failed. Please try again.');
+        }
+        });
+
+        // Password toggle
+        const togglePassword = document.querySelector('.toggle-password');
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function() {
+                const passwordInput = document.getElementById('password');
+                const icon = this.querySelector('i');
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        }
+    });
+  </script>
+</div>
+}

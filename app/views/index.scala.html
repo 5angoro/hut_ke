@@ -1,0 +1,70 @@
+@()
+
+@main("Welcome to Play") {
+<section>
+  <header>
+<div class="header">
+  <nav class="navbar">
+    <div class="logo">
+      <span class="hut">hut</span><span class="ke">.ke</span>
+    </div>
+    <div class="auth-buttons">
+      <a href="manager_ln" class="btn btn-outline">Manager Login</a>
+      <a href="tenant_ln" class="btn btn-primary">Tenant Portal</a>
+    </div>
+  </nav>
+</div>
+</header>
+</section>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Seamless Property Management in Nairobi</h1>
+    <p>Connecting tenants and property managers with modern, transparent tools</p>
+    <div class="cta-buttons">
+      <a href="manager_sp" class="btn btn-secondary">Register Property</a>
+      <a href="tenant_sp" class="btn btn-primary">Join as Tenant</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src='@routes.Assets.versioned("images/hut5.jpg")' alt="Property management illustration">
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="feature-card">
+    <i class="fas fa-receipt"></i>
+    <h3>Digital Receipts</h3>
+    <p>Instant payment confirmation with verifiable receipts</p>
+  </div>
+  <div class="feature-card">
+    <i class="fas fa-bell"></i>
+    <h3>Real-time Notifications</h3>
+    <p>Stay updated on rent payments and announcements</p>
+  </div>
+  <div class="feature-card">
+    <i class="fas fa-comments"></i>
+    <h3>Direct Communication</h3>
+    <p>Message your manager or tenant without sharing personal contacts</p>
+  </div>
+</section>
+
+<footer class="main-footer">
+  <div class="footer-content">
+    <div class="logo">
+      <span class="hut">hut.ke</span>
+    </div>
+    <p>Modern property management solutions for Nairobi</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+  <div class="copyright">
+    &copy; 2023 Hut.ke. All rights reserved.
+  </div>
+</footer>
+
+<script src="main.js"></script>
+}

@@ -1,0 +1,82 @@
+@import helper._
+@import play.mvc.Http.Request
+@()(implicit request: Request)
+@main("Welcome to Play") {
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="logo">
+        <span class="hut">hut</span><span class="ke">.ke</span>
+      </div>
+      <h2>Tenant Portal</h2>
+      <p>Access your rental account</p>
+    </div>
+
+    <form method="post" action="@routes.HomeController.tenantLogin()" class="auth-form" id="tenantLoginForm">
+      @CSRF.formField
+      <div class="form-group">
+        <label for="email">Email or Phone</label>
+        <input type="text" id="email" name="email" placeholder="Enter your email or phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-input">
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <button type="button" class="toggle-password">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" name="remember"> Remember me
+        </label>
+        <a href="#" class="forgot-password">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="tenant_sp">Sign up</a></p>
+        <p>Are you a property manager? <a href="manager_ln">Manager login</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script src="../main.js"></script>
+  <script src="../tenant.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+     const form = document.getElementById('tenantLoginForm');
+
+     form.addEventListener('submit', function(e) {
+         e.preventDefault();
+
+         const submitBtn = form.querySelector('button[type="submit"]');
+         submitBtn.disabled = true;
+         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+             try {
+     // Simulate API call (replace with actual fetch/axios)
+     const response = await fetch(form.action, {
+         method: 'POST',
+         body: new FormData(form),
+     });
+
+     if (!response.ok) throw new Error('Login failed');
+
+     // Success: Redirect or show success message
+     window.location.href = 'tenant_dash'; // Example redirect
+
+    } catch (error) {
+     // Error: Re-enable button and show error
+     submitBtn.disabled = false;
+     submitBtn.innerHTML = originalBtnText;
+     alert('Login failed. Please try again.');
+     }
+     });
+  });
+  </script>
+</div>
+}

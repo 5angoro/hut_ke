@@ -1,0 +1,263 @@
+@()
+
+@main("Welcome to Play") {
+<div class="tenant-dashboard">
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="hut">hut</span><span class="ke">.ke</span>
+        </div>
+        <div class="tenant-info">
+          <div class="avatar">
+            <img src="../assets/default-avatar.png" alt="Tenant Avatar">
+          </div>
+          <h4>John Doe</h4>
+          <p>Apartment 12, Greenview Estate</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active">
+            <a href="#">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#payments">
+              <i class="fas fa-wallet"></i>
+              <span>Payments</span>
+            </a>
+          </li>
+          <li>
+            <a href="#receipts">
+              <i class="fas fa-receipt"></i>
+              <span>Receipts</span>
+            </a>
+          </li>
+          <li>
+            <a href="#messages">
+              <i class="fas fa-envelope"></i>
+              <span>Messages</span>
+              <span class="badge">3</span>
+            </a>
+          </li>
+          <li>
+            <a href="#requests">
+              <i class="fas fa-tools"></i>
+              <span>Maintenance</span>
+            </a>
+          </li>
+          <li>
+            <a href="#notifications">
+              <i class="fas fa-bell"></i>
+              <span>Notifications</span>
+              <span class="badge">5</span>
+            </a>
+          </li>
+          <li>
+            <a href="#settings">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#" class="btn btn-outline btn-block" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <h1>Dashboard</h1>
+          <p>Welcome back, John</p>
+        </div>
+        <div class="header-right">
+          <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button><i class="fas fa-search"></i></button>
+          </div>
+          <div class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="badge">5</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+        <!-- Rent Status Card -->
+        <div class="card rent-status-card">
+          <div class="card-header">
+            <h3>Rent Status</h3>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline">Payment History</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="rent-progress">
+              <div class="progress-info">
+                <h4>Current Month</h4>
+                <p>Due: 5th June 2023</p>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 100%;"></div>
+              </div>
+              <div class="progress-status">
+                                <span class="status-paid">
+                                    <i class="fas fa-check-circle"></i> Paid
+                                </span>
+                <span class="amount">KSh 25,000</span>
+              </div>
+            </div>
+
+            <div class="next-rent-reminder">
+              <i class="fas fa-info-circle"></i>
+              <p>Next rent due in <strong>12 days</strong>. You'll be notified 3 days before.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <div class="action-card" id="payRentBtn">
+            <div class="action-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <h4>Pay Rent</h4>
+            <p>Make rent payment via M-Pesa</p>
+          </div>
+
+          <div class="action-card" id="requestMaintenance">
+            <div class="action-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h4>Request Maintenance</h4>
+            <p>Report issues needing repair</p>
+          </div>
+
+          <div class="action-card" id="messageManager">
+            <div class="action-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h4>Message Manager</h4>
+            <p>Send direct message</p>
+          </div>
+
+          <div class="action-card" id="downloadReceipt">
+            <div class="action-icon">
+              <i class="fas fa-receipt"></i>
+            </div>
+            <h4>Get Receipt</h4>
+            <p>Download payment receipt</p>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card recent-activity">
+          <div class="card-header">
+            <h3>Recent Activity</h3>
+          </div>
+          <div class="card-body">
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="fas fa-check-circle text-success"></i>
+              </div>
+              <div class="activity-content">
+                <h4>Rent Payment Confirmed</h4>
+                <p>Your June rent payment of KSh 25,000 has been received</p>
+                <span class="activity-time">2 hours ago</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="fas fa-bell text-warning"></i>
+              </div>
+              <div class="activity-content">
+                <h4>Upcoming Rent Reminder</h4>
+                <p>Your July rent will be due on 5th July 2023</p>
+                <span class="activity-time">1 day ago</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="fas fa-tools text-info"></i>
+              </div>
+              <div class="activity-content">
+                <h4>Maintenance Update</h4>
+                <p>Your plumbing request has been assigned to a technician</p>
+                <span class="activity-time">3 days ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="modal" id="paymentModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Pay Rent</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="paymentForm">
+          <div class="form-group">
+            <label>Amount (KSh)</label>
+            <input type="number" value="25000" readonly>
+          </div>
+          <div class="form-group">
+            <label>Month</label>
+            <select>
+              <option>July 2023</option>
+              <option>August 2023</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Payment Method</label>
+            <div class="payment-methods">
+              <label class="payment-method active">
+                <input type="radio" name="method" value="mpesa" checked>
+                <i class="fab fa-mpesa"></i>
+                <span>M-Pesa</span>
+              </label>
+              <label class="payment-method">
+                <input type="radio" name="method" value="card">
+                <i class="far fa-credit-card"></i>
+                <span>Card</span>
+              </label>
+              <label class="payment-method">
+                <input type="radio" name="method" value="bank">
+                <i class="fas fa-university"></i>
+                <span>Bank Transfer</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>M-Pesa Number</label>
+            <input type="tel" placeholder="e.g. 0712345678">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Initiate Payment
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../main.js"></script>
+  <script src="../tenant.js"></script>
+</div>
+}

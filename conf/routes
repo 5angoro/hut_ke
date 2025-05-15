@@ -1,0 +1,18 @@
+ # Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index()
+GET    /manager_sp         controllers.HomeController.manager_sp()
+GET    /tenant_sp          controllers.HomeController.tenant_sp()
+GET    /tenant_ln          controllers.HomeController.tenant_ln(request: Request)
+GET    /manager_ln         controllers.HomeController.manager_ln(request: Request)
+GET    /tenant_dash        controllers.HomeController.tenant_dash()
+GET    /manager_dash       controllers.HomeController.manager_dash()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+# Home page
+POST    /login                controllers.HomeController.managerLogin(request: Request)
+POST    /login                controllers.HomeController.tenantLogin(request: Request)
