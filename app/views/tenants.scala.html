@@ -1,0 +1,133 @@
+@()
+
+@main("Welcome to Play") {
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <span class="hut">hut</span><span class="ke">.ke</span>
+    </div>
+    <div class="manager-info">
+      <div class="avatar">
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Manager Avatar">
+      </div>
+      <h4>Jane Manager</h4>
+      <p>Property Manager</p>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul>
+      <li>
+        <a href="payments.html">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Payments</span>
+        </a>
+      </li>
+      <li>
+        <a href="receipts">
+          <i class="fas fa-receipt"></i>
+          <span>Receipts</span>
+        </a>
+      </li>
+      <li>
+        <a href="reports.html">
+          <i class="fas fa-chart-bar"></i>
+          <span>Reports</span>
+        </a>
+      </li>
+      <li>
+        <a href="messages.html">
+          <i class="fas fa-envelope"></i>
+          <span>Messages</span>
+          <span class="badge">5</span>
+        </a>
+      </li>
+      <li>
+        <a href="maintenance.html">
+          <i class="fas fa-tools"></i>
+          <span>Maintenance</span>
+          <span class="badge">3</span>
+        </a>
+      </li>
+      <li>
+        <a href="settings.html">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="#" class="btn btn-outline btn-block" id="logoutBtn">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+  </div>
+</aside>
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Tenant Management</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Search tenants...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+  </header>
+
+  <div class="tenant-grid">
+    <!-- Tenant Card Template -->
+    <div class="tenant-card">
+      <div class="tenant-header">
+        <div class="tenant-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="tenant-name">
+          <h2>John Doe</h2>
+          <span class="badge active">Active</span>
+        </div>
+      </div>
+
+      <div class="tenant-details">
+        <div class="detail-row">
+          <span class="detail-label">ID Number:</span>
+          <span class="detail-value">A12345678</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ID Type:</span>
+          <span class="detail-value">Passport</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Contact:</span>
+          <span class="detail-value">john.doe@@example.com</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Emergency Contact:</span>
+          <span class="detail-value">Jane Doe (555-123-4567)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Employment:</span>
+          <span class="detail-value">Employed at Tech Corp</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Monthly Income:</span>
+          <span class="detail-value">$5,000</span>
+        </div>
+      </div>
+
+      <div class="tenant-actions">
+        <button class="btn view-btn"><i class="fas fa-eye"></i> View</button>
+        <button class="btn edit-btn"><i class="fas fa-edit"></i> Edit</button>
+        <button class="btn document-btn"><i class="fas fa-file-alt"></i> Documents</button>
+      </div>
+    </div>
+
+    <!-- Additional tenant cards would be dynamically generated here -->
+  </div>
+
+  <div class="pagination-controls">
+    <button class="btn pagination-btn"><i class="fas fa-chevron-left"></i></button>
+    <span class="page-number">1</span>
+    <button class="btn pagination-btn"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</div>
+}

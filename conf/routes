@@ -10,6 +10,11 @@ GET    /tenant_ln          controllers.HomeController.tenant_ln(request: Request
 GET    /manager_ln         controllers.HomeController.manager_ln(request: Request)
 GET    /tenant_dash        controllers.HomeController.tenant_dash()
 GET    /manager_dash       controllers.HomeController.manager_dash()
+GET    /tenants            controllers.HomeController.tenants()
+GET    /register_property  controllers.HomeController.register_property()
+GET    /property            controllers.HomeController.property()
+GET    /receipts            controllers.HomeController.receipts()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

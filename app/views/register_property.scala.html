@@ -1,0 +1,197 @@
+@()
+
+@main("Welcome to Play") {
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="hut">hut</span><span class="ke">.ke</span>
+            </div>
+            <div class="manager-info">
+                <div class="avatar">
+                    <img src="../assets/default-avatar.png" alt="Manager Avatar">
+                </div>
+                <h4>Jane Manager</h4>
+                <p>Property Manager</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="manager_dash">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="register-property.html">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Register Property</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="properties.html">
+                        <i class="fas fa-building"></i>
+                        <span>My Properties</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tenants">
+                        <i class="fas fa-users"></i>
+                        <span>Tenants</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="main-header">
+            <div class="header-left">
+                <h1>Register New Property</h1>
+                <p>Add a new property to your portfolio</p>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Property Details</h3>
+                </div>
+                <div class="card-body">
+                    <form id="propertyRegistrationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="propertyName">Property Name</label>
+                                <input type="text" id="propertyName" name="propertyName" placeholder="e.g. Greenview Apartments" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="propertyType">Property Type</label>
+                                <select id="propertyType" name="propertyType" required>
+                                    <option value="">Select property type</option>
+                                    <option value="apartment">Apartment Building</option>
+                                    <option value="house">Residential House</option>
+                                    <option value="commercial">Commercial Property</option>
+                                    <option value="townhouse">Townhouse</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Full Address</label>
+                            <input type="text" id="address" name="address" placeholder="Street address" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city" placeholder="e.g. Nairobi" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="county">County</label>
+                                <input type="text" id="county" name="county" placeholder="e.g. Nairobi" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="postalCode">Postal Code</label>
+                                <input type="text" id="postalCode" name="postalCode" placeholder="e.g. 00100">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Property Description</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Describe the property features and amenities"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Property Images</label>
+                            <div class="file-upload">
+                                <input type="file" id="propertyImages" name="propertyImages" multiple accept="image/*">
+                                <label for="propertyImages" class="upload-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Click to upload images</span>
+                                </label>
+                                <div class="preview-container" id="imagePreview"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Register Property</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/manager.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Image upload preview
+        const propertyImages = document.getElementById('propertyImages');
+        const imagePreview = document.getElementById('imagePreview');
+
+        propertyImages.addEventListener('change', function() {
+            imagePreview.innerHTML = '';
+
+            if (this.files && this.files.length > 0) {
+                for (let i = 0; i < this.files.length; i++) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        const preview = document.createElement('div');
+                        preview.className = 'image-preview';
+                        preview.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview">
+                            <button type="button" class="remove-image">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                        imagePreview.appendChild(preview);
+
+                        // Add remove functionality
+                        preview.querySelector('.remove-image').addEventListener('click', function() {
+                            preview.remove();
+                        });
+                    }
+
+                    reader.readAsDataURL(this.files[i]);
+                }
+            }
+        });
+
+        // Form submission
+        const form = document.getElementById('propertyRegistrationForm');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
+
+            // Simulate form submission
+            setTimeout(() => {
+                // Show success message
+                showToast('Property registered successfully!', 'success');
+
+                // Redirect to properties page
+                setTimeout(() => {
+                    window.location.href = 'property';
+                }, 1500);
+            }, 2000);
+        });
+
+        // Cancel button
+        form.querySelector('.btn-outline').addEventListener('click', function() {
+            window.location.href = 'manager_dash';
+        });
+    });
+</script>
+}

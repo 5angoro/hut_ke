@@ -39,6 +39,14 @@ public class HomeController extends Controller {
 
     public Result manager_dash() {return ok(views.html.manager_dash.render());}
 
+    public Result tenants() {return ok(views.html.tenants.render());}
+
+    public Result register_property() {return ok(views.html.register_property.render());}
+
+    public Result property() {return ok(views.html.property.render());}
+
+    public Result receipts() {return ok(views.html.receipts.render());}
+
     public Result managerLogin(Http.Request request) {
         DynamicForm data = formFactory.form().bindFromRequest(request);
         String email = data.get("email");

@@ -1,0 +1,353 @@
+@()
+
+@main("Welcome to Play") {
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="hut">hut</span><span class="ke">.ke</span>
+      </div>
+      <div class="manager-info">
+        <div class="avatar">
+          <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Manager Avatar">
+        </div>
+        <h4>Jane Manager</h4>
+        <p>Property Manager</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a href="dashboard.html">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="properties.html">
+            <i class="fas fa-building"></i>
+            <span>Properties</span>
+          </a>
+        </li>
+        <li>
+          <a href="tenants.html">
+            <i class="fas fa-users"></i>
+            <span>Tenants</span>
+          </a>
+        </li>
+        <li>
+          <a href="payments.html">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Payments</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="receipts.html">
+            <i class="fas fa-receipt"></i>
+            <span>Receipts</span>
+          </a>
+        </li>
+        <li>
+          <a href="reports.html">
+            <i class="fas fa-chart-bar"></i>
+            <span>Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="messages.html">
+            <i class="fas fa-envelope"></i>
+            <span>Messages</span>
+            <span class="badge">5</span>
+          </a>
+        </li>
+        <li>
+          <a href="maintenance.html">
+            <i class="fas fa-tools"></i>
+            <span>Maintenance</span>
+            <span class="badge">3</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="btn btn-outline btn-block" id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="main-header">
+      <div class="header-left">
+        <h1>Receipts</h1>
+        <p>View and manage all payment receipts</p>
+      </div>
+      <div class="header-right">
+        <div class="search-bar">
+          <input type="text" placeholder="Search receipts...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="notification-icon">
+          <i class="fas fa-bell"></i>
+          <span class="badge">5</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-content">
+      <!-- Filter Controls -->
+      <div class="card">
+        <div class="card-body">
+          <div class="filter-controls">
+            <div class="filter-group">
+              <label>Date Range</label>
+              <select class="form-control">
+                <option>Last 7 days</option>
+                <option selected>Last 30 days</option>
+                <option>Last 3 months</option>
+                <option>Last 6 months</option>
+                <option>Custom range</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Property</label>
+              <select class="form-control">
+                <option>All Properties</option>
+                <option>Greenview Apartments</option>
+                <option>Hilltop Villas</option>
+                <option>Riverside Apartments</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Status</label>
+              <select class="form-control">
+                <option>All Statuses</option>
+                <option>Paid</option>
+                <option>Pending</option>
+                <option>Overdue</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Receipts List -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Recent Receipts</h3>
+          <div class="card-actions">
+            <button class="btn btn-sm btn-outline">Print All</button>
+            <button class="btn btn-sm btn-primary">Generate Report</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Receipt 1 -->
+          <div class="receipt-card">
+            <div class="receipt-header">
+              <div>
+                <h3 class="receipt-title">Rent Payment Receipt</h3>
+                <div class="receipt-number">#REC-2023-06-001</div>
+              </div>
+              <div>
+                <span class="badge badge-success">Paid</span>
+              </div>
+            </div>
+
+            <div class="receipt-details">
+              <div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Tenant</div>
+                  <div class="receipt-value">John Doe</div>
+                </div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Property</div>
+                  <div class="receipt-value">Greenview Apartments, Unit 12</div>
+                </div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Payment Method</div>
+                  <div class="receipt-value">M-Pesa</div>
+                </div>
+              </div>
+              <div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Date</div>
+                  <div class="receipt-value">June 3, 2023</div>
+                </div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Period</div>
+                  <div class="receipt-value">June 2023</div>
+                </div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Transaction Ref</div>
+                  <div class="receipt-value">NJKH45G678</div>
+                </div>
+              </div>
+            </div>
+
+            <table class="receipt-items">
+              <thead>
+              <tr>
+                <th>Description</th>
+                <th>Amount</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Monthly Rent (June 2023)</td>
+                <td>KSh 25,000</td>
+              </tr>
+              <tr>
+                <td>Water Bill</td>
+                <td>KSh 1,200</td>
+              </tr>
+              <tr>
+                <td>Service Charge</td>
+                <td>KSh 800</td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div class="receipt-total">
+              <div>
+                <div class="receipt-label">Total Amount</div>
+                <div class="total-amount">KSh 27,000</div>
+              </div>
+            </div>
+
+            <div class="receipt-footer">
+              <p>Thank you for your payment. For any inquiries, please contact the property manager.</p>
+              <div class="receipt-actions" style="margin-top: 15px;">
+                <button class="btn btn-sm btn-outline">
+                  <i class="fas fa-print"></i> Print
+                </button>
+                <button class="btn btn-sm btn-primary">
+                  <i class="fas fa-download"></i> Download
+                </button>
+                <button class="btn btn-sm btn-success">
+                  <i class="fas fa-envelope"></i> Email
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Receipt 2 -->
+          <div class="receipt-card">
+            <div class="receipt-header">
+              <div>
+                <h3 class="receipt-title">Rent Payment Receipt</h3>
+                <div class="receipt-number">#REC-2023-06-002</div>
+              </div>
+              <div>
+                <span class="badge badge-success">Paid</span>
+              </div>
+            </div>
+
+            <div class="receipt-details">
+              <div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Tenant</div>
+                  <div class="receipt-value">Mary Smith</div>
+                </div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Property</div>
+                  <div class="receipt-value">Hilltop Villas, Unit 5</div>
+                </div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Payment Method</div>
+                  <div class="receipt-value">Bank Transfer</div>
+                </div>
+              </div>
+              <div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Date</div>
+                  <div class="receipt-value">June 2, 2023</div>
+                </div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Period</div>
+                  <div class="receipt-value">June 2023</div>
+                </div>
+                <div class="receipt-row">
+                  <div class="receipt-label">Transaction Ref</div>
+                  <div class="receipt-value">BNK20230602</div>
+                </div>
+              </div>
+            </div>
+
+            <table class="receipt-items">
+              <thead>
+              <tr>
+                <th>Description</th>
+                <th>Amount</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Monthly Rent (June 2023)</td>
+                <td>KSh 30,000</td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div class="receipt-total">
+              <div>
+                <div class="receipt-label">Total Amount</div>
+                <div class="total-amount">KSh 30,000</div>
+              </div>
+            </div>
+
+            <div class="receipt-footer">
+              <p>Thank you for your payment. For any inquiries, please contact the property manager.</p>
+              <div class="receipt-actions" style="margin-top: 15px;">
+                <button class="btn btn-sm btn-outline">
+                  <i class="fas fa-print"></i> Print
+                </button>
+                <button class="btn btn-sm btn-primary">
+                  <i class="fas fa-download"></i> Download
+                </button>
+                <button class="btn btn-sm btn-success">
+                  <i class="fas fa-envelope"></i> Email
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="btn btn-outline">
+          <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <span class="page-number">1</span>
+        <button class="btn btn-outline">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // Basic functionality for the receipts page
+  document.addEventListener('DOMContentLoaded', function() {
+      // Print receipt functionality
+      document.querySelectorAll('.btn-outline').forEach(btn => {
+          if (btn.textContent.includes('Print')) {
+              btn.addEventListener('click', function() {
+                  alert('Print receipt functionality would go here');
+              });
+          }
+      });
+  });
+</script>
+}

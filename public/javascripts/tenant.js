@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-
+            // Add login logic here
+            window.location.href = 'tenant_dash';
         });
     }
 
