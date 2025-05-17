@@ -1,353 +1,756 @@
 @()
 
 @main("Welcome to Play") {
-<div class="dashboard-container">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <div class="logo">
-        <span class="hut">hut</span><span class="ke">.ke</span>
-      </div>
-      <div class="manager-info">
-        <div class="avatar">
-          <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Manager Avatar">
-        </div>
-        <h4>Jane Manager</h4>
-        <p>Property Manager</p>
-      </div>
-    </div>
 
-    <nav class="sidebar-nav">
-      <ul>
-        <li>
-          <a href="dashboard.html">
-            <i class="fas fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="properties.html">
-            <i class="fas fa-building"></i>
-            <span>Properties</span>
-          </a>
-        </li>
-        <li>
-          <a href="tenants.html">
-            <i class="fas fa-users"></i>
-            <span>Tenants</span>
-          </a>
-        </li>
-        <li>
-          <a href="payments.html">
-            <i class="fas fa-money-bill-wave"></i>
-            <span>Payments</span>
-          </a>
-        </li>
-        <li class="active">
-          <a href="receipts.html">
-            <i class="fas fa-receipt"></i>
-            <span>Receipts</span>
-          </a>
-        </li>
-        <li>
-          <a href="reports.html">
-            <i class="fas fa-chart-bar"></i>
-            <span>Reports</span>
-          </a>
-        </li>
-        <li>
-          <a href="messages.html">
-            <i class="fas fa-envelope"></i>
-            <span>Messages</span>
-            <span class="badge">5</span>
-          </a>
-        </li>
-        <li>
-          <a href="maintenance.html">
-            <i class="fas fa-tools"></i>
-            <span>Maintenance</span>
-            <span class="badge">3</span>
-          </a>
-        </li>
-        <li>
-          <a href="settings.html">
-            <i class="fas fa-cog"></i>
-            <span>Settings</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+  <style>
+    :root {
+            /* Color Palette */
+            --primary-color: #460A40;       /* Main brand blue */
+            --primary-light: #C7B5C5;       /* Light blue background */
+            --secondary-color: #DD400C;     /* Accent orange */
+            --dark-color: #230520;          /* Dark text */
+            --light-color: #f8f9fa;         /* Light background */
+            --gray-color: #230520;          /* Gray text */
+            --white: #ffffff;
+            --black: #000000;
 
-    <div class="sidebar-footer">
-      <a href="#" class="btn btn-outline btn-block" id="logoutBtn">
-        <i class="fas fa-sign-out-alt"></i> Logout
+            /* Typography */
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-heading: 'Poppins', sans-serif;
+
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+
+            /* Border radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.18);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.18);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.18);
+
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+
+            /* Layout */
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            color: var(--white);
+            position: fixed;
+            height: 100vh;
+            padding: var(--space-lg);
+            transition: var(--transition-normal);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .logo-icon {
+            color: var(--secondary-color);
+            margin-right: var(--space-xs);
+        }
+
+        .nav-menu {
+            margin-top: var(--space-xl);
+            overflow: hidden;
+        }
+
+        .nav-item {
+            margin-bottom: var(--space-xs);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: var(--space-sm) var(--space-md);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link i {
+            margin-right: var(--space-sm);
+            width: 20px;
+            text-align: center;
+        }
+
+        .badge {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+            overflow: hidden;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: var(--space-lg);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .page-title h1 {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            color: var(--primary-color);
+        }
+
+        .page-title p {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            padding: var(--space-xs) var(--space-sm);
+            box-shadow: var(--shadow-sm);
+            width: 300px;
+            margin-bottom: 20px
+        }
+
+        .search-bar input {
+            border: none;
+            padding: var(--space-xs);
+            width: 250px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            color: var(--gray-color);
+            cursor: pointer;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .stat-icon.properties {
+            background-color: var(--primary-color);
+        }
+
+        .stat-icon.tenants {
+            background-color: var(--secondary-color);
+        }
+
+        .stat-icon.payments {
+            background-color: #4CAF50;
+        }
+
+        .stat-icon.issues {
+            background-color: #F44336;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-label {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+
+        /* Recent Activity */
+        .activity-card {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .card-header h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+        }
+
+        .btn {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+        }
+
+        .activity-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .activity-table th {
+            text-align: left;
+            padding: var(--space-sm);
+            color: var(--gray-color);
+            font-weight: 500;
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        .activity-table td {
+            padding: var(--space-sm);
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        .activity-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: var(--space-sm);
+            object-fit: cover;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-paid {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .status-pending {
+            background-color: #FFF8E1;
+            color: #F57F17;
+        }
+
+        /* Responsive */
+        @@media (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+                padding: var(--space-md);
+            }
+            .logo span {
+                display: none;
+            }
+            .nav-link span {
+                display: none;
+            }
+            .nav-link i {
+                margin-right: 0;
+                font-size: 1.25rem;
+            }
+            .badge {
+                display: none;
+            }
+            .main-content {
+                margin-left: 80px;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-bar {
+                margin-top: var(--space-md);
+                width: 100%;
+            }
+            .search-bar input {
+                width: 100%;
+            }
+        }
+
+    .receipts-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-lg);
+    }
+
+    .receipt-filters {
+        display: flex;
+        gap: var(--space-md);
+        align-items: center;
+    }
+
+    .filter-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .filter-group label {
+        margin-right: var(--space-sm);
+        font-size: 0.9rem;
+    }
+
+    .filter-select {
+        padding: var(--space-xs) var(--space-sm);
+        border: 1px solid var(--primary-light);
+        border-radius: var(--radius-sm);
+        background-color: var(--white);
+    }
+
+    .receipt-card {
+        background-color: var(--white);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        box-shadow: var(--shadow-sm);
+        margin-bottom: var(--space-md);
+        transition: var(--transition-normal);
+    }
+
+    .receipt-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .receipt-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-sm);
+        border-bottom: 1px solid var(--primary-light);
+    }
+
+    .receipt-id {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .receipt-date {
+        color: var(--gray-color);
+        font-size: 0.9rem;
+    }
+
+    .receipt-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+        margin-bottom: var(--space-md);
+    }
+
+    .receipt-tenant {
+        display: flex;
+        align-items: center;
+    }
+
+    .receipt-tenant-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: var(--space-sm);
+        object-fit: cover;
+    }
+
+    .receipt-property {
+        font-weight: 500;
+    }
+
+    .receipt-amount {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .receipt-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: var(--space-md);
+    }
+
+    .receipt-status {
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .status-paid {
+        background-color: #E8F5E9;
+        color: #2E7D32;
+    }
+
+    .status-pending {
+        background-color: #FFF8E1;
+        color: #F57F17;
+    }
+
+    .receipt-actions {
+        display: flex;
+        gap: var(--space-sm);
+    }
+
+    .print-btn {
+        background-color: var(--primary-color);
+        color: var(--white);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        transition: var(--transition-fast);
+    }
+
+    .print-btn:hover {
+        background-color: var(--dark-color);
+    }
+
+    .download-btn {
+        background-color: var(--white);
+        color: var(--primary-color);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--primary-color);
+        cursor: pointer;
+        transition: var(--transition-fast);
+    }
+
+    .download-btn:hover {
+        background-color: var(--primary-light);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: var(--space-xl) 0;
+        color: var(--gray-color);
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: var(--space-md);
+        color: var(--primary-light);
+    }
+  </style>
+
+<!-- Sidebar Navigation (Same as dashboard) -->
+<aside class="sidebar">
+  <div class="logo">
+    <i class="fas fa-home logo-icon"></i>
+    <span>hut.ke</span>
+  </div>
+
+  <ul class="nav-menu">
+    <!-- Copy the same navigation from dashboard.html -->
+    <!-- Make sure receipts link is active -->
+    <li class="nav-item">
+      <a href="#" class="nav-link active">
+        <i class="fas fa-receipt"></i>
+        <span>Receipts</span>
       </a>
+    </li>
+    <li class="nav-item">
+      <a href="manager_dash" class="nav-link">
+        <i class="fas fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="properties" class="nav-link">
+        <i class="fas fa-building"></i>
+        <span>Properties</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="tenants" class="nav-link">
+        <i class="fas fa-users"></i>
+        <span>Tenants</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="payments" class="nav-link">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="receipts" class="nav-link">
+        <i class="fas fa-receipt"></i>
+        <span>Receipts</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="reports" class="nav-link">
+        <i class="fas fa-chart-bar"></i>
+        <span>Reports</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="messages" class="nav-link">
+        <i class="fas fa-envelope"></i>
+        <span>Messages</span>
+        <span class="badge">5</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="maintenance" class="nav-link">
+        <i class="fas fa-tools"></i>
+        <span>Maintenance</span>
+        <span class="badge">3</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="settings" class="nav-link">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="page-title">
+      <h1>Receipts</h1>
+      <p>View and manage payment receipts</p>
     </div>
-  </aside>
+    <div class="search-bar">
+      <input type="text" placeholder="Search receipts...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+  </div>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <header class="main-header">
-      <div class="header-left">
-        <h1>Receipts</h1>
-        <p>View and manage all payment receipts</p>
+  <div class="receipts-header">
+    <h2>All Receipts</h2>
+    <div class="receipt-filters">
+      <div class="filter-group">
+        <label>Filter by:</label>
+        <select class="filter-select">
+          <option>All</option>
+          <option>This Month</option>
+          <option>Last Month</option>
+          <option>This Year</option>
+        </select>
       </div>
-      <div class="header-right">
-        <div class="search-bar">
-          <input type="text" placeholder="Search receipts...">
-          <button><i class="fas fa-search"></i></button>
-        </div>
-        <div class="notification-icon">
-          <i class="fas fa-bell"></i>
-          <span class="badge">5</span>
-        </div>
+      <div class="filter-group">
+        <label>Sort by:</label>
+        <select class="filter-select">
+          <option>Newest First</option>
+          <option>Oldest First</option>
+          <option>Amount (High-Low)</option>
+          <option>Amount (Low-High)</option>
+        </select>
       </div>
-    </header>
+      <button class="btn btn-primary">
+        <i class="fas fa-file-export"></i> Export
+      </button>
+    </div>
+  </div>
 
-    <div class="dashboard-content">
-      <!-- Filter Controls -->
-      <div class="card">
-        <div class="card-body">
-          <div class="filter-controls">
-            <div class="filter-group">
-              <label>Date Range</label>
-              <select class="form-control">
-                <option>Last 7 days</option>
-                <option selected>Last 30 days</option>
-                <option>Last 3 months</option>
-                <option>Last 6 months</option>
-                <option>Custom range</option>
-              </select>
-            </div>
-            <div class="filter-group">
-              <label>Property</label>
-              <select class="form-control">
-                <option>All Properties</option>
-                <option>Greenview Apartments</option>
-                <option>Hilltop Villas</option>
-                <option>Riverside Apartments</option>
-              </select>
-            </div>
-            <div class="filter-group">
-              <label>Status</label>
-              <select class="form-control">
-                <option>All Statuses</option>
-                <option>Paid</option>
-                <option>Pending</option>
-                <option>Overdue</option>
-              </select>
-            </div>
+  <!-- Receipts List -->
+  <div class="receipt-card">
+    <div class="receipt-header">
+      <span class="receipt-id">#RC-2023-0065</span>
+      <span class="receipt-date">June 5, 2023</span>
+    </div>
+
+    <div class="receipt-details">
+      <div>
+        <div class="receipt-tenant">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Tenant" class="receipt-tenant-avatar">
+          <div>
+            <div>John Doe</div>
+            <div class="text-muted" style="font-size: 0.8rem;">Tenant</div>
           </div>
         </div>
       </div>
 
-      <!-- Receipts List -->
-      <div class="card">
-        <div class="card-header">
-          <h3>Recent Receipts</h3>
-          <div class="card-actions">
-            <button class="btn btn-sm btn-outline">Print All</button>
-            <button class="btn btn-sm btn-primary">Generate Report</button>
-          </div>
-        </div>
-        <div class="card-body">
-          <!-- Receipt 1 -->
-          <div class="receipt-card">
-            <div class="receipt-header">
-              <div>
-                <h3 class="receipt-title">Rent Payment Receipt</h3>
-                <div class="receipt-number">#REC-2023-06-001</div>
-              </div>
-              <div>
-                <span class="badge badge-success">Paid</span>
-              </div>
-            </div>
-
-            <div class="receipt-details">
-              <div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Tenant</div>
-                  <div class="receipt-value">John Doe</div>
-                </div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Property</div>
-                  <div class="receipt-value">Greenview Apartments, Unit 12</div>
-                </div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Payment Method</div>
-                  <div class="receipt-value">M-Pesa</div>
-                </div>
-              </div>
-              <div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Date</div>
-                  <div class="receipt-value">June 3, 2023</div>
-                </div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Period</div>
-                  <div class="receipt-value">June 2023</div>
-                </div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Transaction Ref</div>
-                  <div class="receipt-value">NJKH45G678</div>
-                </div>
-              </div>
-            </div>
-
-            <table class="receipt-items">
-              <thead>
-              <tr>
-                <th>Description</th>
-                <th>Amount</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Monthly Rent (June 2023)</td>
-                <td>KSh 25,000</td>
-              </tr>
-              <tr>
-                <td>Water Bill</td>
-                <td>KSh 1,200</td>
-              </tr>
-              <tr>
-                <td>Service Charge</td>
-                <td>KSh 800</td>
-              </tr>
-              </tbody>
-            </table>
-
-            <div class="receipt-total">
-              <div>
-                <div class="receipt-label">Total Amount</div>
-                <div class="total-amount">KSh 27,000</div>
-              </div>
-            </div>
-
-            <div class="receipt-footer">
-              <p>Thank you for your payment. For any inquiries, please contact the property manager.</p>
-              <div class="receipt-actions" style="margin-top: 15px;">
-                <button class="btn btn-sm btn-outline">
-                  <i class="fas fa-print"></i> Print
-                </button>
-                <button class="btn btn-sm btn-primary">
-                  <i class="fas fa-download"></i> Download
-                </button>
-                <button class="btn btn-sm btn-success">
-                  <i class="fas fa-envelope"></i> Email
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Receipt 2 -->
-          <div class="receipt-card">
-            <div class="receipt-header">
-              <div>
-                <h3 class="receipt-title">Rent Payment Receipt</h3>
-                <div class="receipt-number">#REC-2023-06-002</div>
-              </div>
-              <div>
-                <span class="badge badge-success">Paid</span>
-              </div>
-            </div>
-
-            <div class="receipt-details">
-              <div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Tenant</div>
-                  <div class="receipt-value">Mary Smith</div>
-                </div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Property</div>
-                  <div class="receipt-value">Hilltop Villas, Unit 5</div>
-                </div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Payment Method</div>
-                  <div class="receipt-value">Bank Transfer</div>
-                </div>
-              </div>
-              <div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Date</div>
-                  <div class="receipt-value">June 2, 2023</div>
-                </div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Period</div>
-                  <div class="receipt-value">June 2023</div>
-                </div>
-                <div class="receipt-row">
-                  <div class="receipt-label">Transaction Ref</div>
-                  <div class="receipt-value">BNK20230602</div>
-                </div>
-              </div>
-            </div>
-
-            <table class="receipt-items">
-              <thead>
-              <tr>
-                <th>Description</th>
-                <th>Amount</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Monthly Rent (June 2023)</td>
-                <td>KSh 30,000</td>
-              </tr>
-              </tbody>
-            </table>
-
-            <div class="receipt-total">
-              <div>
-                <div class="receipt-label">Total Amount</div>
-                <div class="total-amount">KSh 30,000</div>
-              </div>
-            </div>
-
-            <div class="receipt-footer">
-              <p>Thank you for your payment. For any inquiries, please contact the property manager.</p>
-              <div class="receipt-actions" style="margin-top: 15px;">
-                <button class="btn btn-sm btn-outline">
-                  <i class="fas fa-print"></i> Print
-                </button>
-                <button class="btn btn-sm btn-primary">
-                  <i class="fas fa-download"></i> Download
-                </button>
-                <button class="btn btn-sm btn-success">
-                  <i class="fas fa-envelope"></i> Email
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div>
+        <div class="receipt-property">Apartment 12</div>
+        <div class="text-muted" style="font-size: 0.8rem;">Monthly Rent</div>
       </div>
 
-      <!-- Pagination -->
-      <div class="pagination">
-        <button class="btn btn-outline">
-          <i class="fas fa-chevron-left"></i> Previous
+      <div class="receipt-amount">KSh 25,000</div>
+
+      <div>
+        <div>Payment Method: M-Pesa</div>
+        <div class="text-muted" style="font-size: 0.8rem;">Transaction ID: NLJ812HJK</div>
+      </div>
+    </div>
+
+    <div class="receipt-footer">
+      <span class="receipt-status status-paid">Paid</span>
+      <div class="receipt-actions">
+        <button class="print-btn">
+          <i class="fas fa-print"></i> Print
         </button>
-        <span class="page-number">1</span>
-        <button class="btn btn-outline">
-          Next <i class="fas fa-chevron-right"></i>
+        <button class="download-btn">
+          <i class="fas fa-download"></i> Download
         </button>
       </div>
     </div>
-  </main>
-</div>
+  </div>
+
+  <div class="receipt-card">
+    <div class="receipt-header">
+      <span class="receipt-id">#RC-2023-0064</span>
+      <span class="receipt-date">June 2, 2023</span>
+    </div>
+
+    <div class="receipt-details">
+      <div>
+        <div class="receipt-tenant">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Tenant" class="receipt-tenant-avatar">
+          <div>
+            <div>Mary Smith</div>
+            <div class="text-muted" style="font-size: 0.8rem;">Tenant</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="receipt-property">Apartment 5</div>
+        <div class="text-muted" style="font-size: 0.8rem;">Monthly Rent</div>
+      </div>
+
+      <div class="receipt-amount">KSh 30,000</div>
+
+      <div>
+        <div>Payment Method: Bank Transfer</div>
+        <div class="text-muted" style="font-size: 0.8rem;">Transaction ID: BKT90234</div>
+      </div>
+    </div>
+
+    <div class="receipt-footer">
+      <span class="receipt-status status-paid">Paid</span>
+      <div class="receipt-actions">
+        <button class="print-btn">
+          <i class="fas fa-print"></i> Print
+        </button>
+        <button class="download-btn">
+          <i class="fas fa-download"></i> Download
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state example (hidden by default) -->
+  <!-- <div class="empty-state">
+      <i class="fas fa-receipt"></i>
+      <h3>No receipts found</h3>
+      <p>When you generate or receive payments, receipts will appear here.</p>
+      <button class="btn btn-primary" style="margin-top: var(--space-md);">
+          Record Payment
+      </button>
+  </div> -->
+</main>
 
 <script>
-  // Basic functionality for the receipts page
+  // Receipts page functionality
   document.addEventListener('DOMContentLoaded', function() {
-      // Print receipt functionality
-      document.querySelectorAll('.btn-outline').forEach(btn => {
-          if (btn.textContent.includes('Print')) {
-              btn.addEventListener('click', function() {
-                  alert('Print receipt functionality would go here');
-              });
-          }
-      });
+      // You could add filtering/sorting functionality here
   });
 </script>
 }

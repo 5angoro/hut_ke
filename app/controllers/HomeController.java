@@ -45,7 +45,17 @@ public class HomeController extends Controller {
 
     public Result property() {return ok(views.html.property.render());}
 
+    public Result payments() {return ok(views.html.payments.render());}
+
     public Result receipts() {return ok(views.html.receipts.render());}
+
+    public Result settings() {return ok(views.html.settings.render());}
+
+    public Result messages() {return ok(views.html.messages.render());}
+
+    public Result reports() {return ok(views.html.reports.render());}
+
+    public Result maintenance() {return ok(views.html.maintenance.render());}
 
     public Result managerLogin(Http.Request request) {
         DynamicForm data = formFactory.form().bindFromRequest(request);

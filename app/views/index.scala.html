@@ -1,21 +1,757 @@
-@()
-
 @main("Welcome to Play") {
+<style>
+  :root {
+    /* Extended Color Palette */
+    --primary-color: #460A40;       /* Main purple */
+    --primary-light: #C7B5C5;      /* Light purple */
+    --secondary-color: #DD400C;    /* Accent orange */
+    --tertiary-color: #3A86FF;     /* New blue accent */
+    --quaternary-color: #FFBE0B;   /* New yellow accent */
+    --dark-color: #230520;         /* Dark text */
+    --light-color: #f8f9fa;        /* Light background */
+    --gray-color: #6c757d;         /* Updated gray */
+    --white: #ffffff;
+    --black: #000000;
+
+    /* Typography */
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-primary);
+    color: var(--dark-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Header Styles */
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-sm) 0;
+  }
+
+  html{
+     scroll-behaviour: smooth;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .logo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    display: flex;
+    align-items: center;
+  }
+
+  .logo .hut {
+    color: var(--primary-color);
+  }
+
+  .logo .ke {
+    color: var(--secondary-color);
+  }
+
+  .auth-buttons {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  /* Button Styles */
+  .btn {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: 2px solid var(--primary-color);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: 2px solid var(--secondary-color);
+  }
+
+  .btn-secondary:hover {
+    background-color: #c23616;
+    border-color: #c23616;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--space-xxl) var(--space-md);
+    margin-top: 60px; /* Account for fixed header */
+    background: linear-gradient(rgba(70, 10, 64, 0.7), rgba(70, 10, 64, 0.7)),
+                url('@routes.Assets.versioned("images/hut5.jpg")') no-repeat center center/cover;
+    color: var(--white);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%,
+                rgba(221, 64, 12, 0.3) 0%,
+                rgba(70, 10, 64, 0.8) 70%);
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: var(--space-xl);
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xl);
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .hero-image {
+    position: absolute;
+    right: 5%;
+    bottom: 0;
+    width: 50%;
+    max-width: 700px;
+    z-index: 1;
+    transform: translateY(10%);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .hero-image img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  @@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* Features Section */
+  .features-section {
+    padding: var(--space-xxl) var(--space-md);
+    background-color: var(--light-color);
+  }
+
+ .features-section .container {
+  display: flex;
+  items-align: center;
+  justify: center;
+  width: 100vw;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+
+  }
+
+  .feature-card {
+    background: var(--primary-light);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    text-align: center;
+
+  }
+
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .feature-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-sm);
+    color: var(--primary-color);
+  }
+
+  .feature-card p {
+    color: var(--gray-color);
+  }
+
+  /* About Us Section */
+  .about-section {
+    padding: var(--space-xxl) var(--space-md);
+    background-color: var(--white);
+    position: relative;
+  }
+
+  .about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('@routes.Assets.versioned("images/hut3.png")') repeat;
+    opacity: 0.05;
+    z-index: 0;
+  }
+
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-content h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+    position: relative;
+  }
+
+  .about-content h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+  }
+
+  .about-content p {
+    margin-bottom: var(--space-md);
+    color: var(--gray-color);
+    line-height: 1.8;
+  }
+
+  .about-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .about-image:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Contact Section */
+  .contact-section {
+    display: flex;
+    padding: var(--space-xxl) var(--space-md);
+    background: linear-gradient(135deg, var(--primary-light), var(--white));
+    overflow: hidden;
+  }
+
+  .contact-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: var(--space-sm);
+  }
+
+  .section-subtitle {
+    color: var(--gray-color);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    font-size: 1.25rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-md);
+  }
+
+  .contact-info h3 {
+    font-size: 1.75rem;
+    color: var(--primary-color);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-info p {
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--gray-color);
+  }
+
+  .contact-info i {
+    color: var(--secondary-color);
+    width: 24px;
+    text-align: center;
+  }
+
+  .fab-button {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .fab-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--white);
+    background-color: var(--primary-light);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fab-button a:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .fab-button a::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--dark-color);
+    color: var(--white);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .fab-button a:hover::after {
+    opacity: 1;
+  }
+
+  /* Footer */
+  .main-footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: var(--space-xxl) 0 0;
+    position: relative;
+  }
+
+  .main-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--tertiary-color));
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .footer-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .footer-col {
+    padding: var(--space-md) 0;
+  }
+
+  .footer-col .logo {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-col .logo .hut {
+    color: var(--white);
+  }
+
+  .footer-col .logo .ke {
+    color: var(--secondary-color);
+  }
+
+  .footer-description {
+    color: var(--primary-light);
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .footer-social a {
+    color: var(--white);
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .footer-social a:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+  }
+
+  .footer-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+    position: relative;
+    padding-bottom: var(--space-xs);
+  }
+
+  .footer-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--secondary-color);
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-links a {
+    color: var(--primary-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding: var(--space-xs) 0;
+  }
+
+  .footer-links a:hover {
+    color: var(--white);
+    transform: translateX(5px);
+  }
+
+  .newsletter-text {
+    color: var(--primary-light);
+    margin-bottom: var(--space-md);
+  }
+
+  .newsletter-form {
+    display: flex;
+    margin-bottom: var(--space-lg);
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: var(--space-sm);
+    border: none;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    font-family: var(--font-primary);
+  }
+
+  .newsletter-btn {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    padding: 0 var(--space-md);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .newsletter-btn:hover {
+    background-color: #c23616;
+  }
+
+  .payment-methods {
+    margin-top: var(--space-md);
+  }
+
+  .payment-methods p {
+    color: var(--primary-light);
+    margin-bottom: var(--space-sm);
+    font-size: 0.9rem;
+  }
+
+  .payment-icons {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .payment-icons i {
+    font-size: 1.5rem;
+    color: var(--white);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .payment-icons i:hover {
+    opacity: 1;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: var(--space-md) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .copyright {
+    color: var(--primary-light);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .legal-links {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .legal-links a {
+    color: var(--primary-light);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .legal-links a:hover {
+    color: var(--white);
+  }
+
+  @@media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .copyright {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Responsive Styles */
+  @@media (max-width: 992px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+
+    .about-container {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      height: 400px;
+      order: -1;
+    }
+  }
+
+  @@media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding-top: var(--space-xxl);
+    }
+
+    .hero-content {
+      padding: var(--space-lg);
+    }
+
+    .cta-buttons {
+      justify-content: center;
+    }
+
+    .hero-image {
+      position: relative;
+      right: auto;
+      width: 100%;
+      margin-top: var(--space-xl);
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @@media (max-width: 576px) {
+    .navbar {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .auth-buttons {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+    }
+  }
+</style>
+
 <section>
   <header>
-<div class="header">
-  <nav class="navbar">
-    <div class="logo">
-      <span class="hut">hut</span><span class="ke">.ke</span>
+    <div class="header">
+      <nav class="navbar">
+        <div class="logo">
+          <span class="hut">hut</span><span class="ke">.ke</span>
+        </div>
+        <div class="auth-buttons">
+          <a href="manager_ln" class="btn btn-outline">Manager Login</a>
+          <a href="tenant_ln" class="btn btn-primary">Tenant Portal</a>
+        </div>
+      </nav>
     </div>
-    <div class="auth-buttons">
-      <a href="manager_ln" class="btn btn-outline">Manager Login</a>
-      <a href="tenant_ln" class="btn btn-primary">Tenant Portal</a>
-    </div>
-  </nav>
-</div>
-</header>
+  </header>
 </section>
+
 <section class="hero">
   <div class="hero-content">
     <h1>Seamless Property Management in Nairobi</h1>
@@ -27,27 +763,44 @@
   </div>
 
   <div class="hero-image">
-    <img src='@routes.Assets.versioned("images/hut5.jpg")' alt="Property management illustration">
+    <img src='@routes.Assets.versioned("images/hut5.jpg")' alt="Modern apartment building">
   </div>
 </section>
 
 <section class="features-section">
-  <div class="feature-card">
-    <i class="fas fa-receipt"></i>
-    <h3>Digital Receipts</h3>
-    <p>Instant payment confirmation with verifiable receipts</p>
-  </div>
-  <div class="feature-card">
-    <i class="fas fa-bell"></i>
-    <h3>Real-time Notifications</h3>
-    <p>Stay updated on rent payments and announcements</p>
-  </div>
-  <div class="feature-card">
-    <i class="fas fa-comments"></i>
-    <h3>Direct Communication</h3>
-    <p>Message your manager or tenant without sharing personal contacts</p>
+  <div class="container">
+    <div class="feature-card">
+      <i class="fas fa-receipt"></i>
+      <h3>Digital Receipts</h3>
+      <p>Instant payment confirmation with verifiable receipts</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-bell"></i>
+      <h3>Real-time Notifications</h3>
+      <p>Stay updated on rent payments and announcements</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-comments"></i>
+      <h3>Direct Communication</h3>
+      <p>Message your manager or tenant without sharing personal contacts</p>
+    </div>
   </div>
 </section>
+
+<section class="about-section">
+  <div class="about-container">
+    <div class="about-content">
+      <h2>About Hut.ke</h2>
+      <p>Founded in 2023, Hut.ke is revolutionizing property management in Nairobi by bridging the gap between landlords and tenants through innovative technology solutions.</p>
+      <p>Our platform provides transparent, efficient tools that simplify rent collection, maintenance requests, and communication, creating better experiences for both property managers and residents.</p>
+      <p>With a team of passionate real estate and technology professionals, we're committed to making urban living more convenient and hassle-free.</p>
+    </div>
+    <div class="about-image">
+      <img src='@routes.Assets.versioned("images/hut7.png")' alt="Our team working together">
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="contact-section">
   <div class="container">
     <h2 class="section-title">Contact Us</h2>
@@ -56,7 +809,7 @@
     <div class="contact-grid">
       <div class="contact-info">
         <h3>Get in Touch</h3>
-        <p><i class="fas fa-map-marker-alt"></i>Riara Avenue, Nairobi, 00200</p>
+        <p><i class="fas fa-map-marker-alt"></i> Riara Avenue, Nairobi, 00200</p>
         <p><i class="fas fa-phone"></i> +254 743690110</p>
         <p><i class="fas fa-envelope"></i> info@@hutke.com</p>
         <div class="fab-button">
@@ -65,43 +818,87 @@
           <a href="#" class="fab-button instagram" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="#" class="fab-button linkedin" data-tooltip="Linkedin"><i class="fab fa-linkedin-in"></i></a>
         </div>
-
+      </div>
+      <div class="contact-form">
+        <!-- Contact form would go here -->
       </div>
     </div>
   </div>
 </section>
 
 <footer class="main-footer">
-  <div class="footer-content">
-    <div class="logo">
-      <span class="hut">hut.ke</span>
+  <div class="footer-container">
+    <div class="footer-row">
+      <!-- Company Info -->
+      <div class="footer-col">
+        <div class="logo">
+          <span class="hut">hut</span><span class="ke">.ke</span>
+        </div>
+        <p class="footer-description">Modern property management solutions for Nairobi, connecting landlords and tenants through innovative technology.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="about">About Us</a></li>
+          <li><a href="register_property">For Landlords</a></li>
+          <li><a href="tenant_sp">For Tenants</a></li>
+          <li><a href="contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h3 class="footer-title">Our Services</h3>
+        <ul class="footer-links">
+          <li><a href="#">Rent Collection</a></li>
+          <li><a href="#">Maintenance Tracking</a></li>
+          <li><a href="#">Tenant Communication</a></li>
+          <li><a href="#">Digital Receipts</a></li>
+          <li><a href="#">Property Analytics</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-col">
+        <h3 class="footer-title">Newsletter</h3>
+        <p class="newsletter-text">Subscribe to get updates on new features and offers.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="newsletter-btn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+        <div class="payment-methods">
+          <p>We accept:</p>
+          <div class="payment-icons">
+            <i class="fab fa-cc-paypal" title="M-Pesa"></i>
+            <i class="fab fa-cc-visa" title="Visa"></i>
+            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+          </div>
+        </div>
+      </div>
     </div>
-    <p>Modern property management solutions for Nairobi</p>
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="about">About Us</a></li>
-        <li><a href="register_property">Register Property</a></li>
-        <li><a href="contact">Contact</a></li>
-      </ul>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      <div class="copyright">
+        &copy; 2023 Hut.ke. All rights reserved.
+      </div>
+      <div class="legal-links">
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Service</a>
+        <a href="cookies">Cookie Policy</a>
+      </div>
     </div>
-    <div class="footer-section">
-      <h3>Newsletter</h3>
-      <p>Subscribe to our newsletter for special offers and updates.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Your Email">
-        <button type="submit" class="btn">Subscribe</button>
-      </form>
-    </div>
-    <div class="social-links">
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-linkedin"></i></a>
-    </div>
-  </div>
-  <div class="copyright">
-    &copy; 2023 Hut.ke. All rights reserved.
   </div>
 </footer>
 

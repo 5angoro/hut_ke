@@ -1,0 +1,810 @@
+@()
+
+@main("Welcome to Play") {
+    <style>
+        :root {
+            /* Color Palette */
+            --primary-color: #460A40;       /* Main brand blue */
+            --primary-light: #C7B5C5;       /* Light blue background */
+            --secondary-color: #DD400C;     /* Accent orange */
+            --dark-color: #230520;          /* Dark text */
+            --light-color: #f8f9fa;         /* Light background */
+            --gray-color: #230520;          /* Gray text */
+            --white: #ffffff;
+            --black: #000000;
+
+            /* Typography */
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-heading: 'Poppins', sans-serif;
+
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+
+            /* Border radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.18);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.18);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.18);
+
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+
+            /* Layout */
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            color: var(--white);
+            position: fixed;
+            height: 100vh;
+            padding: var(--space-lg);
+            transition: var(--transition-normal);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .logo-icon {
+            color: var(--secondary-color);
+            margin-right: var(--space-xs);
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin-top: var(--space-xl);
+            overflow: hidden;
+        }
+
+        .nav-item {
+            margin-bottom: var(--space-xs);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: var(--space-sm) var(--space-md);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link i {
+            margin-right: var(--space-sm);
+            width: 20px;
+            text-align: center;
+        }
+
+        .badge {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+            overflow: hidden;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: var(--space-lg);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .page-title h1 {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            color: var(--primary-color);
+        }
+
+        .page-title p {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            padding: var(--space-xs) var(--space-sm);
+            box-shadow: var(--shadow-sm);
+            width: 300px;
+            margin-bottom: 20px
+        }
+
+        .search-bar input {
+            border: none;
+            padding: var(--space-xs);
+            width: 250px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            color: var(--gray-color);
+            cursor: pointer;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--primary-light);
+            margin-bottom: var(--space-lg);
+        }
+
+        .tab {
+            padding: var(--space-sm) var(--space-md);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .tab:hover {
+            color: var(--primary-color);
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Maintenance Cards */
+        .maintenance-card {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+            overflow: hidden;
+            transition: var(--transition-normal);
+        }
+
+        .maintenance-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .maintenance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        .maintenance-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+        }
+
+        .maintenance-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background-color: #FFF8E1;
+            color: #F57F17;
+        }
+
+        .status-in-progress {
+            background-color: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .status-completed {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .status-emergency {
+            background-color: #FFEBEE;
+            color: #C62828;
+        }
+
+        .maintenance-body {
+            padding: var(--space-md);
+        }
+
+        .maintenance-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .meta-item i {
+            margin-right: var(--space-xs);
+            color: var(--gray-color);
+        }
+
+        .maintenance-description {
+            margin-bottom: var(--space-md);
+            color: var(--dark-color);
+        }
+
+        .maintenance-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+
+        .btn {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition-fast);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(70, 10, 64, 0.05);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+        }
+
+        .btn-warning {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn-warning:hover {
+            opacity: 0.9;
+        }
+
+        /* Filter Controls */
+        .filter-controls {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .filter-group {
+            flex: 1;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: var(--space-xs) var(--space-sm);
+            border: 1px solid var(--primary-light);
+            border-radius: var(--radius-sm);
+            background-color: var(--white);
+        }
+
+        /* Staff Table */
+        .staff-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-lg);
+        }
+
+        .staff-table th {
+            text-align: left;
+            padding: var(--space-sm);
+            color: var(--gray-color);
+            font-weight: 500;
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        .staff-table td {
+            padding: var(--space-sm);
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        .staff-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .staff-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .staff-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: var(--space-sm);
+            object-fit: cover;
+        }
+
+        /* Responsive */
+        @@media (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+                padding: var(--space-md);
+            }
+            .logo span {
+                display: none;
+            }
+            .nav-link span {
+                display: none;
+            }
+            .nav-link i {
+                margin-right: 0;
+                font-size: 1.25rem;
+            }
+            .badge {
+                display: none;
+            }
+            .main-content {
+                margin-left: 80px;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-bar {
+                margin-top: var(--space-md);
+                width: 100%;
+            }
+            .search-bar input {
+                width: 100%;
+            }
+            .filter-controls {
+                flex-direction: column;
+            }
+            .maintenance-meta {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            .maintenance-actions {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+<!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="logo">
+        <i class="fas fa-home logo-icon"></i>
+        <span>hut.ke</span>
+    </div>
+
+    <ul class="nav-menu">
+        <li class="nav-item">
+            <a href="manager_dash" class="nav-link">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="property" class="nav-link">
+                <i class="fas fa-building"></i>
+                <span>Properties</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="tenants" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>Tenants</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="payments" class="nav-link">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Payments</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="receipts" class="nav-link">
+                <i class="fas fa-receipt"></i>
+                <span>Receipts</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="reports" class="nav-link">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reports</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="messages" class="nav-link">
+                <i class="fas fa-envelope"></i>
+                <span>Messages</span>
+                <span class="badge">5</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link active">
+                <i class="fas fa-tools"></i>
+                <span>Maintenance</span>
+                <span class="badge">3</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="settings" class="nav-link">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    </ul>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+        <div class="page-title">
+            <h1>Maintenance</h1>
+            <p>Manage maintenance requests and issues</p>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search maintenance...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active" data-tab="requests">Requests</div>
+        <div class="tab" data-tab="staff">Maintenance Staff</div>
+        <div class="tab" data-tab="history">History</div>
+    </div>
+
+    <!-- Requests Tab Content -->
+    <div class="tab-content active" id="requests">
+        <!-- Filter Controls -->
+        <div class="filter-controls">
+            <div class="filter-group">
+                <label>Property</label>
+                <select>
+                    <option>All Properties</option>
+                    <option>Greenview Apartments</option>
+                    <option>Hilltop Villas</option>
+                    <option>Riverside Apartments</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Status</label>
+                <select>
+                    <option>All Statuses</option>
+                    <option>Pending</option>
+                    <option>In Progress</option>
+                    <option>Completed</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Urgency</label>
+                <select>
+                    <option>All Urgencies</option>
+                    <option>Emergency</option>
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Maintenance Requests -->
+        <div class="maintenance-card">
+            <div class="maintenance-header">
+                <h3 class="maintenance-title">Burst Water Pipe</h3>
+                <span class="maintenance-status status-emergency">Emergency</span>
+            </div>
+            <div class="maintenance-body">
+                <div class="maintenance-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>John Doe (Apartment 12)</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-building"></i>
+                        <span>Greenview Apartments</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>June 5, 2023</span>
+                    </div>
+                </div>
+                <div class="maintenance-description">
+                    <p>Water pipe burst in the kitchen causing flooding. Need immediate attention to prevent water damage to the unit below.</p>
+                </div>
+                <div class="maintenance-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-user-tie"></i> Assign Staff
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="maintenance-card">
+            <div class="maintenance-header">
+                <h3 class="maintenance-title">Electrical Fault</h3>
+                <span class="maintenance-status status-in-progress">In Progress</span>
+            </div>
+            <div class="maintenance-body">
+                <div class="maintenance-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>Mary Smith (Apartment 5)</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-building"></i>
+                        <span>Hilltop Villas</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>June 3, 2023</span>
+                    </div>
+                </div>
+                <div class="maintenance-description">
+                    <p>Several power outlets in the living room not working. Suspected wiring issue.</p>
+                </div>
+                <div class="maintenance-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Update Status
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="maintenance-card">
+            <div class="maintenance-header">
+                <h3 class="maintenance-title">Broken Window</h3>
+                <span class="maintenance-status status-completed">Completed</span>
+            </div>
+            <div class="maintenance-body">
+                <div class="maintenance-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>David Kimani (House 3)</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-building"></i>
+                        <span>Riverside Apartments</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>May 28, 2023</span>
+                    </div>
+                </div>
+                <div class="maintenance-description">
+                    <p>Bedroom window broken during storm. Needs replacement.</p>
+                </div>
+                <div class="maintenance-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                    <button class="btn btn-warning">
+                        <i class="fas fa-file-alt"></i> View Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Tab Content -->
+    <div class="tab-content" id="staff">
+        <div class="filter-controls">
+            <div class="filter-group">
+                <label>Specialization</label>
+                <select>
+                    <option>All Specializations</option>
+                    <option>Plumbing</option>
+                    <option>Electrical</option>
+                    <option>Carpentry</option>
+                    <option>General</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Status</label>
+                <select>
+                    <option>All Statuses</option>
+                    <option>Available</option>
+                    <option>Assigned</option>
+                    <option>On Leave</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <button class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-plus"></i> Add Staff
+                </button>
+            </div>
+        </div>
+
+        <table class="staff-table">
+            <thead>
+            <tr>
+                <th>Staff Member</th>
+                <th>Specialization</th>
+                <th>Contact</th>
+                <th>Assigned Tasks</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <div class="staff-info">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Mwangi" class="staff-avatar">
+                        <span>James Mwangi</span>
+                    </div>
+                </td>
+                <td>Plumbing, Electrical</td>
+                <td>0712345678</td>
+                <td>2</td>
+                <td><span class="maintenance-status status-in-progress">Assigned</span></td>
+                <td>
+                    <button class="btn btn-outline btn-sm">
+                        <i class="fas fa-eye"></i> View
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="staff-info">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Peter Omondi" class="staff-avatar">
+                        <span>Peter Omondi</span>
+                    </div>
+                </td>
+                <td>Carpentry, Masonry</td>
+                <td>0723456789</td>
+                <td>1</td>
+                <td><span class="maintenance-status status-pending">Available</span></td>
+                <td>
+                    <button class="btn btn-outline btn-sm">
+                        <i class="fas fa-eye"></i> View
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="staff-info">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Susan Atieno" class="staff-avatar">
+                        <span>Susan Atieno</span>
+                    </div>
+                </td>
+                <td>Cleaning, Landscaping</td>
+                <td>0734567890</td>
+                <td>0</td>
+                <td><span class="maintenance-status status-pending">Available</span></td>
+                <td>
+                    <button class="btn btn-outline btn-sm">
+                        <i class="fas fa-eye"></i> View
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script>
+    // Tab functionality
+  document.addEventListener('DOMContentLoaded', function() {
+      // Add active class to current nav item
+      const currentPage = window.location.pathname.split('/').pop();
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      navLinks.forEach(link => {
+          if (link.getAttribute('href') === currentPage) {
+              link.classList.add('active');
+          }
+      });
+
+      // Tab switching
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach(tab => {
+          tab.addEventListener('click', function() {
+              // Remove active class from all tabs and contents
+              tabs.forEach(t => t.classList.remove('active'));
+              tabContents.forEach(c => c.classList.remove('active'));
+
+              // Add active class to clicked tab
+              tab.classList.add('active');
+
+              // Get the target content ID from data-target attribute
+              const target = tab.getAttribute('data-target');
+              const content = document.querySelector(`.tab-content[data-content="${target}"]`);
+              if (content) {
+                  content.classList.add('active');
+              }
+          });
+      });
+  });
+
+</script>
+}

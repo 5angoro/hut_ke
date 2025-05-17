@@ -1,0 +1,666 @@
+@()
+
+@main("Welcome to Play") {
+  <style>
+    :root {
+        /* Color Palette */
+        --primary-color: #460A40;       /* Main brand blue */
+        --primary-light: #C7B5C5;       /* Light blue background */
+        --secondary-color: #DD400C;     /* Accent orange */
+        --dark-color: #230520;          /* Dark text */
+        --light-color: #f8f9fa;         /* Light background */
+        --gray-color: #230520;          /* Gray text */
+        --white: #ffffff;
+        --black: #000000;
+
+        /* Typography */
+        --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        --font-heading: 'Poppins', sans-serif;
+
+        /* Spacing */
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 1.5rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+
+        /* Border radius */
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+
+        /* Shadows */
+        --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.18);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.18);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.18);
+
+        /* Transitions */
+        --transition-fast: 0.15s ease;
+        --transition-normal: 0.3s ease;
+        --transition-slow: 0.5s ease;
+
+        /* Layout */
+        --sidebar-width: 280px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: var(--font-primary);
+        color: var(--dark-color);
+        background-color: var(--light-color);
+        line-height: 1.6;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+        width: var(--sidebar-width);
+        background-color: var(--primary-color);
+        color: var(--white);
+        position: fixed;
+        height: 100vh;
+        padding: var(--space-lg);
+        transition: var(--transition-normal);
+        z-index: 100;
+    }
+
+    .logo {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: var(--space-xl);
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .logo-icon {
+        color: var(--secondary-color);
+        margin-right: var(--space-xs);
+    }
+
+    .nav-menu {
+        list-style: none;
+        margin-top: var(--space-xl);
+        overflow: hidden;
+    }
+
+    .nav-item {
+        margin-bottom: var(--space-xs);
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        padding: var(--space-sm) var(--space-md);
+        color: var(--white);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        transition: var(--transition-fast);
+    }
+
+    .nav-link:hover, .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link i {
+        margin-right: var(--space-sm);
+        width: 20px;
+        text-align: center;
+    }
+
+    .badge {
+        background-color: var(--secondary-color);
+        color: var(--white);
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 10px;
+        margin-left: auto;
+        overflow: hidden;
+    }
+
+    /* Main Content */
+    .main-content {
+        margin-left: var(--sidebar-width);
+        padding: var(--space-lg);
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-xl);
+    }
+
+    .page-title h1 {
+        font-family: var(--font-heading);
+        font-size: 1.75rem;
+        color: var(--primary-color);
+    }
+
+    .page-title p {
+        color: var(--gray-color);
+        font-size: 0.9rem;
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        background-color: var(--white);
+        border-radius: var(--radius-md);
+        padding: var(--space-xs) var(--space-sm);
+        box-shadow: var(--shadow-sm);
+        width: 300px;
+        margin-bottom: 20px
+    }
+
+    .search-bar input {
+        border: none;
+        padding: var(--space-xs);
+        width: 250px;
+        outline: none;
+    }
+
+    .search-bar button {
+        background: none;
+        border: none;
+        color: var(--gray-color);
+        cursor: pointer;
+    }
+
+    /* Filter Controls */
+    .filter-controls {
+        display: flex;
+        gap: var(--space-md);
+        margin-bottom: var(--space-lg);
+    }
+
+    .filter-group {
+        flex: 1;
+    }
+
+    .filter-group label {
+        display: block;
+        margin-bottom: var(--space-xs);
+        font-size: 0.9rem;
+        color: var(--gray-color);
+    }
+
+    .filter-group select, .filter-group input {
+        width: 100%;
+        padding: var(--space-xs) var(--space-sm);
+        border: 1px solid var(--primary-light);
+        border-radius: var(--radius-sm);
+        background-color: var(--white);
+    }
+
+    /* Payment Table */
+    .payment-card {
+        background-color: var(--white);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        margin-bottom: var(--space-xl);
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-md);
+        border-bottom: 1px solid var(--primary-light);
+    }
+
+    .card-header h3 {
+        font-family: var(--font-heading);
+        font-size: 1.25rem;
+    }
+
+    .card-actions {
+        display: flex;
+        gap: var(--space-sm);
+    }
+
+    .btn {
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: var(--transition-fast);
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .btn-outline:hover {
+        background-color: rgba(70, 10, 64, 0.05);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--white);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--dark-color);
+    }
+
+    .payment-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .payment-table th {
+        text-align: left;
+        padding: var(--space-sm);
+        color: var(--gray-color);
+        font-weight: 500;
+        border-bottom: 1px solid var(--primary-light);
+    }
+
+    .payment-table td {
+        padding: var(--space-sm);
+        border-bottom: 1px solid var(--primary-light);
+    }
+
+    .payment-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .payment-table tr:hover {
+        background-color: rgba(70, 10, 64, 0.03);
+    }
+
+    .tenant-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .tenant-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin-right: var(--space-sm);
+        object-fit: cover;
+    }
+
+    .payment-status {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status-paid {
+        background-color: #E8F5E9;
+        color: #2E7D32;
+    }
+
+    .status-pending {
+        background-color: #FFF8E1;
+        color: #F57F17;
+    }
+
+    .status-overdue {
+        background-color: #FFEBEE;
+        color: #C62828;
+    }
+
+    .action-btn {
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        cursor: pointer;
+        margin-right: var(--space-xs);
+    }
+
+    .action-btn:hover {
+        color: var(--dark-color);
+    }
+
+    /* Summary Cards */
+    .summary-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--space-md);
+        margin-bottom: var(--space-lg);
+    }
+
+    .summary-card {
+        background-color: var(--white);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .summary-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: var(--space-xs);
+    }
+
+    .summary-label {
+        color: var(--gray-color);
+        font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @@media (max-width: 992px) {
+        .sidebar {
+            width: 80px;
+            padding: var(--space-md);
+        }
+        .logo span {
+            display: none;
+        }
+        .nav-link span {
+            display: none;
+        }
+        .nav-link i {
+            margin-right: 0;
+            font-size: 1.25rem;
+        }
+        .badge {
+            display: none;
+        }
+        .main-content {
+            margin-left: 80px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .search-bar {
+            margin-top: var(--space-md);
+            width: 100%;
+        }
+        .search-bar input {
+            width: 100%;
+        }
+        .filter-controls {
+            flex-direction: column;
+        }
+        .payment-table {
+            font-size: 0.9rem;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .payment-table {
+            display: block;
+            overflow-x: auto;
+        }
+        .summary-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+  </style>
+<!-- Sidebar Navigation -->
+<aside class="sidebar">
+  <div class="logo">
+    <i class="fas fa-home logo-icon"></i>
+    <span>hut.ke</span>
+  </div>
+
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <a href="manager_dash" class="nav-link">
+        <i class="fas fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="property" class="nav-link">
+        <i class="fas fa-building"></i>
+        <span>Properties</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="tenants" class="nav-link">
+        <i class="fas fa-users"></i>
+        <span>Tenants</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link active">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="receipts" class="nav-link">
+        <i class="fas fa-receipt"></i>
+        <span>Receipts</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="reports" class="nav-link">
+        <i class="fas fa-chart-bar"></i>
+        <span>Reports</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="messages" class="nav-link">
+        <i class="fas fa-envelope"></i>
+        <span>Messages</span>
+        <span class="badge">5</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="maintenance" class="nav-link">
+        <i class="fas fa-tools"></i>
+        <span>Maintenance</span>
+        <span class="badge">3</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="settings" class="nav-link">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="page-title">
+      <h1>Payments</h1>
+      <p>Track and manage rental payments</p>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search payments...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards">
+    <div class="summary-card">
+      <div class="summary-value">KSh 480,000</div>
+      <div class="summary-label">This Month</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-value">KSh 2,150,000</div>
+      <div class="summary-label">This Quarter</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-value">24</div>
+      <div class="summary-label">Paid Tenants</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-value">3</div>
+      <div class="summary-label">Overdue</div>
+    </div>
+  </div>
+
+  <!-- Filter Controls -->
+  <div class="filter-controls">
+    <div class="filter-group">
+      <label>Date Range</label>
+      <select>
+        <option>Last 7 days</option>
+        <option selected>Last 30 days</option>
+        <option>Last 3 months</option>
+        <option>Custom range</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Property</label>
+      <select>
+        <option>All Properties</option>
+        <option>Greenview Apartments</option>
+        <option>Hilltop Villas</option>
+        <option>Riverside Apartments</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Status</label>
+      <select>
+        <option>All Statuses</option>
+        <option>Paid</option>
+        <option>Pending</option>
+        <option>Overdue</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Payment Table -->
+  <div class="payment-card">
+    <div class="card-header">
+      <h3>Recent Payments</h3>
+      <div class="card-actions">
+        <button class="btn btn-outline">Export</button>
+        <button class="btn btn-primary">Record Payment</button>
+      </div>
+    </div>
+
+    <table class="payment-table">
+      <thead>
+      <tr>
+        <th>Tenant</th>
+        <th>Property</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Method</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="tenant-info">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe" class="tenant-avatar">
+            <span>John Doe</span>
+          </div>
+        </td>
+        <td>Greenview Apts, Unit 12</td>
+        <td>KSh 25,000</td>
+        <td>Jun 3, 2023</td>
+        <td>M-Pesa</td>
+        <td><span class="payment-status status-paid">Paid</span></td>
+        <td>
+          <button class="action-btn" title="View Receipt">
+            <i class="fas fa-receipt"></i>
+          </button>
+          <button class="action-btn" title="Send Reminder">
+            <i class="fas fa-bell"></i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="tenant-info">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Mary Smith" class="tenant-avatar">
+            <span>Mary Smith</span>
+          </div>
+        </td>
+        <td>Hilltop Villas, Unit 5</td>
+        <td>KSh 30,000</td>
+        <td>Jun 2, 2023</td>
+        <td>Bank Transfer</td>
+        <td><span class="payment-status status-paid">Paid</span></td>
+        <td>
+          <button class="action-btn" title="View Receipt">
+            <i class="fas fa-receipt"></i>
+          </button>
+          <button class="action-btn" title="Send Reminder">
+            <i class="fas fa-bell"></i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="tenant-info">
+            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="David Kimani" class="tenant-avatar">
+            <span>David Kimani</span>
+          </div>
+        </td>
+        <td>Riverside Apts, House 3</td>
+        <td>KSh 45,000</td>
+        <td>Jun 1, 2023</td>
+        <td>Cash</td>
+        <td><span class="payment-status status-pending">Pending</span></td>
+        <td>
+          <button class="action-btn" title="View Receipt">
+            <i class="fas fa-receipt"></i>
+          </button>
+          <button class="action-btn" title="Send Reminder">
+            <i class="fas fa-bell"></i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="tenant-info">
+            <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Sarah Johnson" class="tenant-avatar">
+            <span>Sarah Johnson</span>
+          </div>
+        </td>
+        <td>Sunset Villas, Unit 8</td>
+        <td>KSh 28,000</td>
+        <td>May 28, 2023</td>
+        <td>M-Pesa</td>
+        <td><span class="payment-status status-overdue">Overdue</span></td>
+        <td>
+          <button class="action-btn" title="View Receipt">
+            <i class="fas fa-receipt"></i>
+          </button>
+          <button class="action-btn" title="Send Reminder">
+            <i class="fas fa-bell"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<script>
+  // Simple script for demonstration
+  document.addEventListener('DOMContentLoaded', function() {
+      // Add active class to current nav item
+      const currentPage = window.location.pathname.split('/').pop();
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      navLinks.forEach(link => {
+          if (link.getAttribute('href') === currentPage) {
+              link.classList.add('active');
+          }
+      });
+  });
+</script>
+}
