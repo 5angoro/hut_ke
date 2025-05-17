@@ -56,9 +56,10 @@
     top: 0;
     width: 100%;
     z-index: 1000;
-    background-color: var(--white);
+    background-color: var(--primary-light);
     box-shadow: var(--shadow-sm);
     padding: var(--space-sm) 0;
+    border-radius: 10px;
   }
 
   html{
@@ -141,7 +142,7 @@
   }
 
   .btn-outline:hover {
-    background-color: var(--primary-light);
+    background-color: var(--white);
     transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
   }
@@ -154,8 +155,8 @@
     align-items: center;
     padding: var(--space-xxl) var(--space-md);
     margin-top: 60px; /* Account for fixed header */
-    background: linear-gradient(rgba(70, 10, 64, 0.7), rgba(70, 10, 64, 0.7)),
-                url('@routes.Assets.versioned("images/hut5.jpg")') no-repeat center center/cover;
+    background: linear-gradient(rgba(70, 10, 64, 0.5), rgba(70, 10, 64, 0.4)),
+                url('@routes.Assets.versioned("images/hut1.jpg")') no-repeat center center/cover;
     color: var(--white);
     overflow: hidden;
   }
@@ -174,10 +175,11 @@
   }
 
   .hero-content {
-    position: relative;
+    position: absolute;
     z-index: 1;
-    max-width: 600px;
+    max-width: 1000px;
     padding: var(--space-xl);
+    overflow: hidden;
   }
 
   .hero-content h1 {
@@ -193,6 +195,7 @@
     margin-bottom: var(--space-xl);
     opacity: 0.9;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: var(--secondary-color)
   }
 
   .cta-buttons {
@@ -200,7 +203,7 @@
     gap: var(--space-md);
   }
 
-  .hero-image {
+ .hero-image {
     position: absolute;
     right: 5%;
     bottom: 0;
@@ -209,6 +212,7 @@
     z-index: 1;
     transform: translateY(10%);
     animation: float 6s ease-in-out infinite;
+    overflow: hidden;
   }
 
   .hero-image img {
@@ -313,6 +317,7 @@
     color: var(--primary-color);
     margin-bottom: var(--space-md);
     position: relative;
+    overflow: hidden;
   }
 
   .about-content h2::after {
@@ -757,14 +762,14 @@
     <h1>Seamless Property Management in Nairobi</h1>
     <p>Connecting tenants and property managers with modern, transparent tools</p>
     <div class="cta-buttons">
-      <a href="register_property" class="btn btn-secondary">Register Property</a>
+      <a href="manager_sp" class="btn btn-secondary">Register Property</a>
       <a href="tenant_sp" class="btn btn-primary">Join as Tenant</a>
     </div>
   </div>
 
-  <div class="hero-image">
+ <!-- <div class="hero-image">
     <img src='@routes.Assets.versioned("images/hut5.jpg")' alt="Modern apartment building">
-  </div>
+  </div>-->
 </section>
 
 <section class="features-section">
@@ -848,7 +853,7 @@
         <h3 class="footer-title">Quick Links</h3>
         <ul class="footer-links">
           <li><a href="#">Home</a></li>
-          <li><a href="about">About Us</a></li>
+          <li><a href="#about-section">About Us</a></li>
           <li><a href="register_property">For Landlords</a></li>
           <li><a href="tenant_sp">For Tenants</a></li>
           <li><a href="contact">Contact</a></li>
