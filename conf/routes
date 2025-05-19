@@ -20,6 +20,13 @@ GET    /reports             controllers.HomeController.reports()
 GET    /messages            controllers.HomeController.messages()
 GET    /settings            controllers.HomeController.settings()
 
+GET    /receipts_tn            controllers.HomeController.receipts_tn()
+GET    /maintenance_tn         controllers.HomeController.maintenance_tn()
+GET    /payment_tn             controllers.HomeController.payment_tn()
+GET    /notification_tn        controllers.HomeController.notification_tn()
+GET    /messages_tn            controllers.HomeController.messages_tn()
+GET    /settings_tn            controllers.HomeController.settings_tn()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

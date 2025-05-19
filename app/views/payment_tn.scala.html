@@ -1,6 +1,125 @@
-@main("Tenant Dashboard | Hut.ke") {
+@main("Payments | Hut.ke") {
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="hut">hut</span><span class="ke">.ke</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a href="tenant_dash">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="#">
+            <i class="fas fa-wallet"></i>
+            <span>Payments</span>
+          </a>
+        </li>
+        <li>
+          <a href="receipts_tn">
+            <i class="fas fa-receipt"></i>
+            <span>Receipts</span>
+          </a>
+        </li>
+        <li>
+          <a href="messages_tn">
+            <i class="fas fa-envelope"></i>
+            <span>Messages</span>
+            <span class="badge">3</span>
+          </a>
+        </li>
+        <li>
+          <a href="maintenance_tn">
+            <i class="fas fa-tools"></i>
+            <span>Maintenance</span>
+          </a>
+        </li>
+        <li>
+          <a href="notification_tn">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+            <span class="badge">5</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings_tn">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="main-header">
+      <div class="header-left">
+        <h1>Payment History</h1>
+        <p>View and manage your rent payments</p>
+      </div>
+      <div class="header-right">
+        <div class="search-bar">
+          <input type="text" placeholder="Search payments...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-content">
+      <div class="card">
+        <div class="card-header">
+          <h3>All Payments</h3>
+          <div class="card-actions">
+            <button class="btn btn-sm btn-outline">Export</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="payment-table">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Month</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+                <th>Receipt</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>05 Jun 2025</td>
+                <td>June 2025</td>
+                <td>KSh 25,000</td>
+                <td>M-Pesa</td>
+                <td><span class="status-badge status-paid">Paid</span></td>
+                <td><button class="btn btn-sm btn-outline">Download</button></td>
+              </tr>
+              <!-- More payment rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
 <style>
-  /* Modern Color Palette with Success Colors */
+
   :root {
     --primary-color: #460A40;       /* Deep purple */
     --primary-light: #F3E5F5;       /* Light purple */
@@ -144,7 +263,7 @@
 
   .sidebar-nav {
     flex: 1;
-    overflow: hidden;
+    overflow-y: auto;
     padding: 0 var(--space-md);
   }
 
@@ -785,341 +904,32 @@
       grid-template-columns: 1fr;
     }
   }
+  .payment-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .payment-table th, .payment-table td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    border-bottom: 1px solid var(--primary-light);
+  }
+  
+  .payment-table th {
+    font-weight: 500;
+    color: var(--gray-color);
+  }
+  
+  .status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .status-paid {
+    background-color: #E8F5E9;
+    color: var(--success-color);
+  }
 </style>
-
-<div class="dashboard-container">
-  <!-- Modern Slim Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <div class="logo">
-        <span class="hut">hut</span><span class="ke">.ke</span>
-      </div>
-    </div>
-
-    <nav class="sidebar-nav">
-      <ul>
-        <li class="active">
-          <a href="#">
-            <i class="fas fa-home"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="payment_tn">
-            <i class="fas fa-wallet"></i>
-            <span>Payments</span>
-          </a>
-        </li>
-        <li>
-          <a href="receipts_tn">
-            <i class="fas fa-receipt"></i>
-            <span>Receipts</span>
-          </a>
-        </li>
-        <li>
-          <a href="messages_tn">
-            <i class="fas fa-envelope"></i>
-            <span>Messages</span>
-            <span class="badge">3</span>
-          </a>
-        </li>
-        <li>
-          <a href="maintenance_tn">
-            <i class="fas fa-tools"></i>
-            <span>Maintenance</span>
-          </a>
-        </li>
-        <li>
-          <a href="notification_tn">
-            <i class="fas fa-bell"></i>
-            <span>Notifications</span>
-            <span class="badge">5</span>
-          </a>
-        </li>
-        <li>
-          <a href="settings_tn">
-            <i class="fas fa-cog"></i>
-            <span>Settings</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="sidebar-footer">
-      <button id="logoutBtn">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
-      </button>
-    </div>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <header class="main-header">
-      <div class="header-left">
-        <h1>Dashboard</h1>
-        <p>Welcome back, John</p>
-      </div>
-      <div class="header-right">
-        <div class="search-bar">
-          <input type="text" placeholder="Search...">
-          <button><i class="fas fa-search"></i></button>
-        </div>
-        <div class="notification-icon">
-          <i class="fas fa-bell"></i>
-          <span class="badge">5</span>
-        </div>
-      </div>
-    </header>
-
-    <div class="dashboard-content">
-      <!-- Rent Status Card with Success Progress Bar -->
-      <div class="card rent-status-card">
-        <div class="card-header">
-          <h3>Rent Status</h3>
-          <div class="card-actions">
-            <button class="btn btn-sm btn-outline">Payment History</button>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="rent-progress">
-            <div class="progress-info">
-              <h4>Current Month</h4>
-              <p>Due: 5th June 2025</p>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 100%;"></div>
-            </div>
-            <div class="progress-status">
-              <span class="status-paid">
-                <i class="fas fa-check-circle"></i> Paid
-              </span>
-              <span class="amount">KSh 25,000</span>
-            </div>
-          </div>
-
-          <div class="next-rent-reminder">
-            <i class="fas fa-info-circle"></i>
-            <p>Next rent due in <strong>12 days</strong>. You'll be notified 3 days before.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Actions -->
-      <div class="quick-actions">
-        <div class="action-card" id="payRentBtn">
-          <div class="action-icon">
-            <i class="fas fa-money-bill-wave"></i>
-          </div>
-          <h4>Pay Rent</h4>
-          <p>Make rent payment via M-Pesa</p>
-        </div>
-
-        <div class="action-card" id="requestMaintenance">
-          <div class="action-icon">
-            <i class="fas fa-tools"></i>
-          </div>
-          <h4>Request Maintenance</h4>
-          <p>Report issues needing repair</p>
-        </div>
-
-        <div class="action-card" id="messageManager">
-          <div class="action-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <h4>Message Manager</h4>
-          <p>Send direct message</p>
-        </div>
-
-        <div class="action-card" id="downloadReceipt">
-          <div class="action-icon">
-            <i class="fas fa-receipt"></i>
-          </div>
-          <h4>Get Receipt</h4>
-          <p>Download payment receipt</p>
-        </div>
-      </div>
-
-      <!-- Recent Activity -->
-      <div class="card recent-activity">
-        <div class="card-header">
-          <h3>Recent Activity</h3>
-        </div>
-        <div class="card-body">
-          <div class="activity-item">
-            <div class="activity-icon text-success">
-              <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="activity-content">
-              <h4>Rent Payment Confirmed</h4>
-              <p>Your June rent payment of KSh 25,000 has been received</p>
-              <span class="activity-time">2 hours ago</span>
-            </div>
-          </div>
-
-          <div class="activity-item">
-            <div class="activity-icon text-warning">
-              <i class="fas fa-bell"></i>
-            </div>
-            <div class="activity-content">
-              <h4>Upcoming Rent Reminder</h4>
-              <p>Your July rent will be due on 5th July 2025</p>
-              <span class="activity-time">1 day ago</span>
-            </div>
-          </div>
-
-          <div class="activity-item">
-            <div class="activity-icon text-info">
-              <i class="fas fa-tools"></i>
-            </div>
-            <div class="activity-content">
-              <h4>Maintenance Update</h4>
-              <p>Your plumbing request has been assigned to a technician</p>
-              <span class="activity-time">3 days ago</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<!-- Payment Modal -->
-<div class="modal" id="paymentModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3>Pay Rent</h3>
-      <button class="close-modal">&times;</button>
-    </div>
-    <div class="modal-body">
-      <form id="paymentForm">
-        <div class="form-group">
-          <label>Amount (KSh)</label>
-          <input type="number" value="25000" readonly>
-        </div>
-        <div class="form-group">
-          <label>Month</label>
-          <select>
-            <option>July 2025</option>
-            <option>August 2025</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Payment Method</label>
-          <div class="payment-methods">
-            <label class="payment-method active">
-              <input type="radio" name="method" value="mpesa" checked>
-              <i class="fab fa-mpesa"></i>
-              <span>M-Pesa</span>
-            </label>
-            <label class="payment-method">
-              <input type="radio" name="method" value="card">
-              <i class="far fa-credit-card"></i>
-              <span>Card</span>
-            </label>
-            <label class="payment-method">
-              <input type="radio" name="method" value="bank">
-              <i class="fas fa-university"></i>
-              <span>Bank Transfer</span>
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>M-Pesa Number</label>
-          <input type="tel" placeholder="e.g. 0712345678">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">
-          Initiate Payment
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Open payment modal
-    document.getElementById('payRentBtn').addEventListener('click', function() {
-      const modal = document.getElementById('paymentModal');
-      modal.style.display = 'flex';
-      setTimeout(() => {
-        modal.classList.add('active');
-      }, 10);
-    });
-
-    // Close modal
-    document.querySelector('.close-modal').addEventListener('click', function() {
-      const modal = document.getElementById('paymentModal');
-      modal.classList.remove('active');
-      setTimeout(() => {
-        modal.style.display = 'none';
-      }, 300);
-    });
-
-    // Payment method selection
-    const paymentMethods = document.querySelectorAll('.payment-method');
-    paymentMethods.forEach(method => {
-      method.addEventListener('click', function() {
-        paymentMethods.forEach(m => m.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-
-    // Quick action cards hover effect
-    const actionCards = document.querySelectorAll('.action-card');
-    actionCards.forEach(card => {
-      card.addEventListener('mouseenter', function() {
-        const icon = this.querySelector('.action-icon');
-        icon.style.transform = 'scale(1.1)';
-      });
-
-      card.addEventListener('mouseleave', function() {
-        const icon = this.querySelector('.action-icon');
-        icon.style.transform = 'scale(1)';
-      });
-    });
-
-    // Form submission
-    document.getElementById('paymentForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      // Show loading state
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-      submitBtn.disabled = true;
-
-      // Simulate payment processing
-      setTimeout(() => {
-        // Show success message
-        alert('Payment initiated successfully!');
-
-        // Reset form
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-
-        // Close modal
-        document.getElementById('paymentModal').classList.remove('active');
-        setTimeout(() => {
-          document.getElementById('paymentModal').style.display = 'none';
-        }, 300);
-      }, 2000);
-    });
-
-    // Logout button
-    document.getElementById('logoutBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      if(confirm('Are you sure you want to logout?')) {
-        // Show loading state
-        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-
-        // Simulate logout process
-        setTimeout(() => {
-          // Redirect to login page
-          window.location.href = 'login';
-        }, 1000);
-      }
-    });
-  });
-</script>
 }

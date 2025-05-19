@@ -47,15 +47,27 @@ public class HomeController extends Controller {
 
     public Result payments() {return ok(views.html.payments.render());}
 
+    public Result payment_tn() {return ok(views.html.payment_tn.render());}
+
     public Result receipts() {return ok(views.html.receipts.render());}
+
+    public Result receipts_tn() {return ok(views.html.receipts_tn.render());}
 
     public Result settings() {return ok(views.html.settings.render());}
 
+    public Result settings_tn() {return ok(views.html.settings_tn.render());}
+
     public Result messages() {return ok(views.html.messages.render());}
+
+    public Result messages_tn() {return ok(views.html.messages_tn.render());}
 
     public Result reports() {return ok(views.html.reports.render());}
 
+    public Result notification_tn() {return ok(views.html.notification_tn.render());}
+
     public Result maintenance() {return ok(views.html.maintenance.render());}
+
+    public Result maintenance_tn() {return ok(views.html.maintenance_tn.render());}
 
     public Result managerLogin(Http.Request request) {
         DynamicForm data = formFactory.form().bindFromRequest(request);

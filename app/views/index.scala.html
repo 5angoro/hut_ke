@@ -53,7 +53,6 @@
   /* Header Styles */
   .header {
     position: fixed;
-    top: 0;
     width: 100%;
     z-index: 1000;
     background-color: var(--primary-light);
@@ -68,28 +67,21 @@
 
   .navbar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    justify-content: right;
+    max-width: 50%;
+    margin-top: -60px;
+    margin-left: 70%;
     padding: 0 var(--space-md);
   }
 
-  .logo {
-    font-size: 1.75rem;
-    font-weight: 700;
-    font-family: var(--font-heading);
-    display: flex;
-    align-items: center;
-  }
+.logo-img {
+  height: 50px; /* adjust as needed */
+  width: auto;
+  max-width: 50%;
+  margin-left: 20px;
 
-  .logo .hut {
-    color: var(--primary-color);
-  }
+}
 
-  .logo .ke {
-    color: var(--secondary-color);
-  }
 
   .auth-buttons {
     display: flex;
@@ -247,7 +239,7 @@
     background: var(--primary-light);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
     text-align: center;
 
@@ -744,10 +736,10 @@
 <section>
   <header>
     <div class="header">
-      <nav class="navbar">
         <div class="logo">
-          <span class="hut">hut</span><span class="ke">.ke</span>
+          <img src='@routes.Assets.versioned("images/logo.png")'alt="hut.ke logo" class="logo-img">
         </div>
+        <nav class="navbar">
         <div class="auth-buttons">
           <a href="manager_ln" class="btn btn-outline">Manager Login</a>
           <a href="tenant_ln" class="btn btn-primary">Tenant Portal</a>
@@ -759,7 +751,7 @@
 
 <section class="hero">
   <div class="hero-content">
-    <h1>Seamless Property Management in Nairobi</h1>
+    <h1>Seamless Property Management in Kenya</h1>
     <p>Connecting tenants and property managers with modern, transparent tools</p>
     <div class="cta-buttons">
       <a href="manager_sp" class="btn btn-secondary">Register Property</a>
@@ -792,11 +784,11 @@
   </div>
 </section>
 
-<section class="about-section">
+<section id="about" class="about-section">
   <div class="about-container">
     <div class="about-content">
       <h2>About Hut.ke</h2>
-      <p>Founded in 2023, Hut.ke is revolutionizing property management in Nairobi by bridging the gap between landlords and tenants through innovative technology solutions.</p>
+      <p>Founded in 2025, Hut.ke is revolutionizing property management in Kenya by bridging the gap between landlords and tenants through innovative technology solutions.</p>
       <p>Our platform provides transparent, efficient tools that simplify rent collection, maintenance requests, and communication, creating better experiences for both property managers and residents.</p>
       <p>With a team of passionate real estate and technology professionals, we're committed to making urban living more convenient and hassle-free.</p>
     </div>
@@ -839,7 +831,7 @@
         <div class="logo">
           <span class="hut">hut</span><span class="ke">.ke</span>
         </div>
-        <p class="footer-description">Modern property management solutions for Nairobi, connecting landlords and tenants through innovative technology.</p>
+        <p class="footer-description">Modern property management solutions for Kenya, connecting landlords and tenants through innovative technology.</p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -853,10 +845,10 @@
         <h3 class="footer-title">Quick Links</h3>
         <ul class="footer-links">
           <li><a href="#">Home</a></li>
-          <li><a href="#about-section">About Us</a></li>
+          <li><a href="#about">About Us</a></li>
           <li><a href="register_property">For Landlords</a></li>
           <li><a href="tenant_sp">For Tenants</a></li>
-          <li><a href="contact">Contact</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
 
@@ -896,7 +888,7 @@
     <!-- Copyright -->
     <div class="footer-bottom">
       <div class="copyright">
-        &copy; 2023 Hut.ke. All rights reserved.
+        &copy; 2025 Hut.ke. All rights reserved.
       </div>
       <div class="legal-links">
         <a href="privacy">Privacy Policy</a>
